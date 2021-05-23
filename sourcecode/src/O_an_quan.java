@@ -27,8 +27,9 @@ public class O_an_quan {
         for(int i=0;i<cell_rocks;i++) {
             pointer +=k;
             board[pointer%12] +=1;
+            printBoard();
         }
-        printBoard();
+       
         if(!((pointer+k)%12==0||(pointer+k)%12==6)) {
             if(board[(pointer+k)%12] != 0) {
                 move(pointer+k, direction);

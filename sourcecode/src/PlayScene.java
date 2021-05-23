@@ -1,4 +1,4 @@
-import javafx.application.Application;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -12,9 +12,8 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
-public class TestPlayScene  extends Application {
+public class PlayScene  {
 	
 	
 	//for drawing the board
@@ -121,8 +120,7 @@ public class TestPlayScene  extends Application {
 	}
 	
 	
-	@Override
-	public void start(Stage stage) {
+	public Scene playScene() {
 		
 		   
 		   
@@ -956,19 +954,15 @@ public class TestPlayScene  extends Application {
        });
     
         
-	    Group grp5 = new Group(finish, turn, r1, r2, r3, r4, r5, r7, r8, r9, r10, r11, l1,l2,l3,l4,l5,l6,l7,l8,l9,l10,l11, t1, t2);
-	    grp5.getChildren().addAll(cell0, cell1, cell2, cell3, cell4, cell5, cell7, cell8, cell9, cell10, cell11, cell6);
+	    Group root = new Group(finish, turn, r1, r2, r3, r4, r5, r7, r8, r9, r10, r11, l1,l2,l3,l4,l5,l6,l7,l8,l9,l10,l11, t1, t2);
+	    root.getChildren().addAll(cell0, cell1, cell2, cell3, cell4, cell5, cell7, cell8, cell9, cell10, cell11, cell6);
 	         
-	    Scene playScene = new Scene(grp5, 1000, 600);  
+	    Scene playScene = new Scene(root, 1000, 600);  
 	    
-	    stage.setScene(playScene);
 	    
-	    stage.show();
+	    return playScene;
 	 
 
 	}
 	
-	public static void main(String[] args) {
-		launch();
-	}
 }
