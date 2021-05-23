@@ -1,6 +1,7 @@
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 public class ExitScene {
@@ -16,7 +17,7 @@ public class ExitScene {
 		nobtn.setLayoutY(300);
 		yesbtn.setLayoutX(500);
 		nobtn.setLayoutX(500);
-		Scene exitScene = new Scene(root, 1000, 600);
+		Scene exitScene = new Scene(root, 1000, 600, Color.WHEAT);
 		
 		return exitScene;
 	}

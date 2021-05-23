@@ -27,7 +27,6 @@ public class O_an_quan {
         for(int i=0;i<cell_rocks;i++) {
             pointer +=k;
             board[pointer%12] +=1;
-            printBoard();
         }
        
         if(!((pointer+k)%12==0||(pointer+k)%12==6)) {
@@ -181,8 +180,4 @@ public class O_an_quan {
         return true;
     }
 
-    public static void main(String[] args) {
-        O_an_quan a = new O_an_quan();
-        a.start();
-    }
 }

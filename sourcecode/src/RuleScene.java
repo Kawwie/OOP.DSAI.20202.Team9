@@ -1,6 +1,7 @@
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 public class RuleScene {
@@ -47,7 +48,7 @@ public class RuleScene {
 	
 	public Scene ruleScene() {
 		
-		Scene ruleScene = new Scene(root, 1000, 600);
+		Scene ruleScene = new Scene(root, 1000, 600, Color.WHEAT);
 		return ruleScene;
 		
 	}

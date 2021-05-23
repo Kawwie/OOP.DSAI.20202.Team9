@@ -957,7 +957,7 @@ public class PlayScene  {
 	    Group root = new Group(finish, turn, r1, r2, r3, r4, r5, r7, r8, r9, r10, r11, l1,l2,l3,l4,l5,l6,l7,l8,l9,l10,l11, t1, t2);
 	    root.getChildren().addAll(cell0, cell1, cell2, cell3, cell4, cell5, cell7, cell8, cell9, cell10, cell11, cell6);
 	         
-	    Scene playScene = new Scene(root, 1000, 600);  
+	    Scene playScene = new Scene(root, 1000, 600, Color.WHEAT);  
 	    
 	    
 	    return playScene;
