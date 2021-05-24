@@ -1,7 +1,9 @@
+package test;
 
 
 
 
+import board.NormalCell;
 import javafx.animation.PathTransition;  
 import javafx.application.Application;
 import javafx.event.ActionEvent;

@@ -1,3 +1,8 @@
+package test;
+import board.Cell;
+import board.KingCell;
+import board.NormalCell;
+import board.Stone;
 import javafx.animation.PathTransition;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -41,6 +46,11 @@ public class PlaySceneVer2 extends Application {
     NormalCell c8 = new NormalCell(525, 300, 8);
     NormalCell c7 = new NormalCell(625, 300, 7);
     
+    KingCell c0 = new KingCell(175, 300, 0);
+    KingCell c6 = new KingCell(775, 300, 6);
+    
+    Cell[] Board = {c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11};
+    
     Group root = new Group();
     
     @Override
@@ -77,22 +87,30 @@ public class PlaySceneVer2 extends Application {
 	   c8.clockwise.setOnAction(new EventHandler<ActionEvent>() {
 		   @Override
 		   public void handle(ActionEvent e) {
-			   while (c8.countStone() > 0) {
+
+				   
+			   int pointer = c8.pos%12 + 12;
+			   int rocks = c8.countStone();
+			   for(int j=0;j< rocks;j++) {
+				   
+				   pointer +=1;
 				   Path path = new Path();
 				   Stone i = c8.num_stone.get(0);
 				   c8.num_stone.remove(0);
 				   path.getElements().add(new MoveTo(i.getCenterX(), i.getCenterY()));
-				   path.getElements().add(new LineTo(500, 500));
+				   path.getElements().add(new LineTo(Board[pointer%12].locationx, Board[pointer%12].locationy));
 				   PathTransition pathTransition = new PathTransition();  
-				   pathTransition.setDuration(Duration.millis(100));  
+				   pathTransition.setDuration(Duration.millis(2000));  
 				   pathTransition.setNode(i);  
 				   pathTransition.setPath(path);  
 				   pathTransition.play();
-				   System.out.println(c8.countStone());
 				   
 			   }
+			  
 			   
 		   }
+			   
+		   
 		   
 	   });
     	

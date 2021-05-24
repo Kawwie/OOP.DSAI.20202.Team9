@@ -1,3 +1,4 @@
+package scene;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -6,9 +7,9 @@ import javafx.scene.text.Text;
 
 public class ExitScene {
 	
-	Button yesbtn = new Button("Yes");
-	Button nobtn = new Button("No");
-	Text confirmexit = new Text("Are you sure want to quit");
+	public Button yesbtn = new Button("Yes");
+	public Button nobtn = new Button("No");
+	public Text confirmexit = new Text("Are you sure want to quit");
 	Group root = new Group(confirmexit, yesbtn, nobtn);
 	
 	public Scene exitScene() {

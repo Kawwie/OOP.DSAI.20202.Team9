@@ -1,3 +1,6 @@
+package test;
+import board.NormalCell;
+import board.Stone;
 import javafx.animation.PathTransition;
 import javafx.application.Application;
 import javafx.event.ActionEvent;

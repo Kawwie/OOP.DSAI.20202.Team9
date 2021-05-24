@@ -1,5 +1,4 @@
-
-import java.util.ArrayList;
+package board;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.ContextMenu;
@@ -7,21 +6,16 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 
 
 
-public class NormalCell {
+
+public class NormalCell extends Cell{
 	
-	int pos;
-	Rectangle rectangle = new Rectangle(100, 100, Color.FORESTGREEN);
-	Text text = new Text("5");
-	ArrayList<Stone> num_stone = new ArrayList<Stone>();
-	
-	
-	MenuItem clockwise = new MenuItem("Clockwise");
-	MenuItem counter_clockwise = new MenuItem("Counter ClockWise");
-	ContextMenu contextmenu = new ContextMenu(clockwise, counter_clockwise);
+	public Rectangle rectangle = new Rectangle(100, 100, Color.FORESTGREEN);
+	public MenuItem clockwise = new MenuItem("Clockwise");
+	public MenuItem counter_clockwise = new MenuItem("Counter ClockWise");
+	public ContextMenu contextmenu = new ContextMenu(clockwise, counter_clockwise);
 	
 	
 	public int countStone() {
@@ -30,6 +24,10 @@ public class NormalCell {
 	
 	
 	public NormalCell(double x, double y, int pos) {
+		
+		
+		this.locationx = x + 50;
+		this.locationy = y + 50;
 		
 		
 		Stone stone1 = new Stone(x + 50, y + 50);

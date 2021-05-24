@@ -1,4 +1,7 @@
+package scene;
 
+import board.NormalCell;
+import board.O_an_quan;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -13,7 +16,6 @@ public class PlayScene  {
 	
 	
 	//for drawing the board
-	
 	
 	Line l1 = new Line(225, 200, 225, 400);
 	Line l2 = new Line(325, 200, 325, 400);
