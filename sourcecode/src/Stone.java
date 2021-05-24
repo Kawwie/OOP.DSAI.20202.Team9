@@ -3,7 +3,11 @@ import javafx.scene.shape.Circle;
 
 public class Stone extends Circle {
 	
+	
+	
 	public Stone(double centerX, double centerY) {
+		
+		
 		
 		this.setCenterX(centerX);
 		this.setCenterY(centerY);

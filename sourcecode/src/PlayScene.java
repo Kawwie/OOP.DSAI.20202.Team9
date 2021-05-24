@@ -13,15 +13,17 @@ public class PlayScene  {
 	
 	
 	//for drawing the board
-	Line l1 = new Line();
-	Line l2 = new Line();
-	Line l3 = new Line();
-	Line l4 = new Line();
-	Line l5 = new Line();
-	Line l6 = new Line();
-	Line l7 = new Line();
-	Line l8 = new Line();
-	Line l9 = new Line();
+	
+	
+	Line l1 = new Line(225, 200, 225, 400);
+	Line l2 = new Line(325, 200, 325, 400);
+	Line l3 = new Line(425, 200, 425, 400);
+	Line l4 = new Line(525, 200, 525, 400);
+	Line l5 = new Line(625, 200, 625, 400);
+	Line l6 = new Line(725, 200, 725, 400);
+	Line l7 = new Line(225, 200, 725, 200);
+	Line l8 = new Line(225, 300, 725, 300);
+	Line l9 = new Line(225, 400, 725, 400);
 	Arc l10 = new Arc(225, 300, 100, 100, 90, 180);
 	Arc l11 = new Arc(725, 300, 100, 100, 270, 180);
 	
@@ -39,16 +41,16 @@ public class PlayScene  {
     
     
     //for setting cell value and add actionlistener
-    Cell c1 = new Cell(225, 200, 1);
-    Cell c2 = new Cell(325, 200, 2);
-    Cell c3 = new Cell(425, 200, 3);
-    Cell c4 = new Cell(525, 200, 4);
-    Cell c5 = new Cell(625, 200, 5);
-    Cell c11 = new Cell(225, 300, 11);
-    Cell c10 = new Cell(325, 300, 10);
-    Cell c9 = new Cell(425, 300, 9);
-    Cell c8 = new Cell(525, 300, 8);
-    Cell c7 = new Cell(625, 300, 7);
+    NormalCell c1 = new NormalCell(225, 200, 1);
+    NormalCell c2 = new NormalCell(325, 200, 2);
+    NormalCell c3 = new NormalCell(425, 200, 3);
+    NormalCell c4 = new NormalCell(525, 200, 4);
+    NormalCell c5 = new NormalCell(625, 200, 5);
+    NormalCell c11 = new NormalCell(225, 300, 11);
+    NormalCell c10 = new NormalCell(325, 300, 10);
+    NormalCell c9 = new NormalCell(425, 300, 9);
+    NormalCell c8 = new NormalCell(525, 300, 8);
+    NormalCell c7 = new NormalCell(625, 300, 7);
     
     
     // determine play1 go first
@@ -63,7 +65,7 @@ public class PlayScene  {
 	
 	
 	// set actionlistener for each cell
-	public void setActionListener(Cell i) {
+	public void setActionListener(NormalCell i) {
 		
 		i.clockwise.setOnAction(new EventHandler<ActionEvent>() {
 	    	   @Override
@@ -151,42 +153,7 @@ public class PlayScene  {
 		
 		   
 	   //drawing the board	   
-       l1.setStartX(200+25);
-       l1.setEndX(200+25);
-       l1.setStartY(200);
-       l1.setEndY(400);       
-       l2.setStartX(300+25);
-       l2.setEndX(300+25);
-       l2.setStartY(200);
-       l2.setEndY(400);       
-       l3.setStartX(400+25);
-       l3.setEndX(400+25);
-       l3.setStartY(200);
-       l3.setEndY(400);      
-       l4.setStartX(500+25);
-       l4.setEndX(500+25);
-       l4.setStartY(200);
-       l4.setEndY(400);     
-       l5.setStartX(600+25);
-       l5.setEndX(600+25);
-       l5.setStartY(200);
-       l5.setEndY(400);     
-       l6.setStartX(700+25);
-       l6.setEndX(700+25);
-       l6.setStartY(200);
-       l6.setEndY(400);      
-       l7.setStartX(200+25);
-       l7.setEndX(700+25);
-       l7.setStartY(200);
-       l7.setEndY(200);     
-       l8.setStartX(200+25);
-       l8.setEndX(700+25);
-       l8.setStartY(400);
-       l8.setEndY(400);     
-       l9.setStartX(200+25);
-       l9.setEndX(700+25);
-       l9.setStartY(300);
-       l9.setEndY(300);     
+         
        l10.setFill(null);
        l10.setStrokeWidth(1);
        l10.setStroke(Color.BLACK);      
@@ -225,6 +192,18 @@ public class PlayScene  {
 	   root.getChildren().addAll(c11.rectangle, c11.text);
 	   
 	   root.getChildren().addAll(l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11);
+	   
+	   root.getChildren().addAll(c1.num_stone);
+	   root.getChildren().addAll(c2.num_stone);
+	   root.getChildren().addAll(c3.num_stone);
+	   root.getChildren().addAll(c4.num_stone);
+	   root.getChildren().addAll(c5.num_stone);
+	   root.getChildren().addAll(c7.num_stone);
+	   root.getChildren().addAll(c8.num_stone);
+	   root.getChildren().addAll(c9.num_stone);
+	   root.getChildren().addAll(c10.num_stone);
+	   root.getChildren().addAll(c11.num_stone);
+	 
 	          
 	   Scene playScene = new Scene(root, 1000, 600, Color.WHEAT);  
 	  

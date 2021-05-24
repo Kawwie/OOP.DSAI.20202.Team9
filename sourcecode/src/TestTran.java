@@ -25,6 +25,10 @@ public void start(Stage primaryStage) throws Exception {
 	Button btnRun = new Button("Run");
 	btnRun.setLayoutX(100);
 	btnRun.setLayoutY(100);
+	
+	NormalCell c1 = new NormalCell(200, 200, 1);
+	NormalCell c2 = new NormalCell(400, 400, 2);
+	NormalCell c3 = new NormalCell(100, 500, 3);
 	btnRun.setOnAction(new EventHandler<ActionEvent>() {
 		public void handle(ActionEvent e) {
 			
@@ -32,23 +36,28 @@ public void start(Stage primaryStage) throws Exception {
 			point.setLayoutX(100);
 			point.setRadius(20);
 			point.setFill(Color.BLANCHEDALMOND);
+			int x = 3;
+			while(x > 0) {
+				Path path = new Path();  
+			    path.getElements().add (new MoveTo (150f, 70f));  
+			    path.getElements().add (new LineTo (640f, 700f));  
+			      
+
+			    PathTransition pathTransition = new PathTransition();  
+			    pathTransition.setDuration(Duration.millis(100));  
+			    pathTransition.setNode(point);  
 			 
-		    Path path = new Path();  
-		    path.getElements().add (new MoveTo (150f, 70f));  
-		    path.getElements().add (new LineTo (640f, 700f));  
-		      
+			    pathTransition.setPath(path);  
+			      
+			  
+			    pathTransition.setAutoReverse(false);  
+			  
 
-		    PathTransition pathTransition = new PathTransition();  
-		    pathTransition.setDuration(Duration.millis(1000));  
-		    pathTransition.setNode(point);  
-		 
-		    pathTransition.setPath(path);  
-		      
-		  
-		    pathTransition.setAutoReverse(false);  
-		  
-
-		    pathTransition.play();
+			    pathTransition.play();
+			    x-=1;
+				
+			}
+			 
 		}
 		
 	});
@@ -56,7 +65,16 @@ public void start(Stage primaryStage) throws Exception {
 	  
       
     //Configuring group and scene   
-    Group root = new Group(btnRun, point);  
+    Group root = new Group(btnRun, point);
+    
+    root.getChildren().addAll(c1.rectangle);
+    root.getChildren().addAll(c2.rectangle);
+    root.getChildren().addAll(c3.rectangle);
+    root.getChildren().addAll(c1.num_stone);
+    root.getChildren().addAll(c2.num_stone);
+    root.getChildren().addAll(c3.num_stone);
+    
+    
 
     Scene scene = new Scene(root, 1000, 800, Color.WHEAT);  
     primaryStage.setScene(scene);  
