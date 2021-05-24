@@ -1,25 +1,40 @@
 
+import javafx.event.EventHandler;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import java.util.ArrayList;
+import javafx.scene.text.Text;
+
+
 
 public class Cell {
 	
+	int pos;
 	Rectangle rectangle = new Rectangle(100, 100, Color.FORESTGREEN);
-	ArrayList<Stone> cell;
+	Text text = new Text("5");
+	MenuItem clockwise = new MenuItem("Clockwise");
+	MenuItem counter_clockwise = new MenuItem("Counter ClockWise");
+	ContextMenu contextmenu = new ContextMenu(clockwise, counter_clockwise);
 	
-	public Cell(double x, double y) {
+	
+	public Cell(double x, double y, int pos) {
+		
+		this.pos = pos;
 		this.rectangle.setX(x);
 		this.rectangle.setY(y);
-		Stone stone1 = new Stone(x + 10, y+ 10);
-		Stone stone2 = new Stone(x + 20, y+ 20);
-		Stone stone3 = new Stone(x + 30, y+ 30);
-		Stone stone4 = new Stone(x + 40, y+ 40);
-		Stone stone5 = new Stone(x + 50, y+ 50);
-		cell.add(stone1);
-		cell.add(stone2);
-		cell.add(stone3);
-		cell.add(stone4);
-		cell.add(stone5);
+		
+		text.setX(x+50);
+		text.setY(y+50);
+		
+		rectangle.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
+			@Override
+			public void handle(ContextMenuEvent e) {
+				contextmenu.show(rectangle, e.getScreenX(), e.getScreenY());
+				
+			}
+		});
+		
 	}
 }
