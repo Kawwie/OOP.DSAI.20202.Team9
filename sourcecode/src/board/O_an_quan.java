@@ -1,18 +1,19 @@
+package board;
 import java.util.Scanner;
 
 
 public class O_an_quan {
 
-    int[] board = {10, 5, 5, 5, 5, 5, 10, 5, 5, 5, 5, 5};
+    public int[] board = {10, 5, 5, 5, 5, 5, 10, 5, 5, 5, 5, 5};
     static int pointer;
-    static int turn = 0;
+    public static int turn = 0;
 
-    class player {
-        int score = 0;
+    public class player {
+        public int score = 0;
     }
 
-    player player1 = new player();
-    player player2 = new player();
+    public player player1 = new player();
+    public player player2 = new player();
 
     public void move(int position, String direction) {
 
@@ -27,7 +28,6 @@ public class O_an_quan {
         for(int i=0;i<cell_rocks;i++) {
             pointer +=k;
             board[pointer%12] +=1;
-            printBoard();
         }
        
         if(!((pointer+k)%12==0||(pointer+k)%12==6)) {
@@ -181,8 +181,4 @@ public class O_an_quan {
         return true;
     }
 
-    public static void main(String[] args) {
-        O_an_quan a = new O_an_quan();
-        a.start();
-    }
 }

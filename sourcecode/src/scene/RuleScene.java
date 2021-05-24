@@ -1,14 +1,16 @@
+package scene;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 public class RuleScene {
 	
 	
-	Button returnbtn = new Button("Return");
+	public Button returnbtn = new Button("Return");
 	
-	Text rule = new Text(100, 100, "Mục tiêu cần đạt được để giành chiến thắng: người thắng cuộc trong trò chơi này là người mà khi cuộc chơi kết thúc có tổng số dân quy đổi nhiều hơn."
+	public Text rule = new Text(100, 100, "Mục tiêu cần đạt được để giành chiến thắng: người thắng cuộc trong trò chơi này là người mà khi cuộc chơi kết thúc có tổng số dân quy đổi nhiều hơn."
 			+ "\n\n"
 			+ "Tùy theo luật chơi từng địa phương hoặc thỏa thuận giữa hai người chơi nhưng phổ biến là 1 quan được quy đổi bằng 10 dân hoặc 5 dân (cờ)."
 			+ "\n\n"
@@ -43,11 +45,11 @@ public class RuleScene {
 			+ "\n Ô quan có ít dân (có số dân nhỏ hơn 5 phổ biến được coi là ít) gọi là quan non và để cuộc chơi không bị kết thúc sớm cho tăng phần thú vị,"
 			+ "\n luật chơi có thể quy định không được ăn quan non, nếu rơi vào tình huống đó sẽ bị mất lượt.");
 	
-	Group root = new Group(returnbtn, rule);
+	public Group root = new Group(returnbtn, rule);
 	
 	public Scene ruleScene() {
 		
-		Scene ruleScene = new Scene(root, 1000, 600);
+		Scene ruleScene = new Scene(root, 1000, 600, Color.WHEAT);
 		return ruleScene;
 		
 	}

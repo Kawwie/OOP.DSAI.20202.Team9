@@ -1,19 +1,12 @@
+package GUI;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.MenuItem;
-import javafx.scene.input.ContextMenuEvent;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Arc;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.scene.Group;
 import javafx.stage.Stage;
+import scene.ExitScene;
+import scene.MainScene;
+import scene.PlayScene;
+import scene.RuleScene;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+
 
 public class GUI extends Application {
 	
