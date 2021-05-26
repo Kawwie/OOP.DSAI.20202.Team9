@@ -24,8 +24,8 @@ public class NormalCell extends Cell{
 		rectangle.setStroke(Color.BLACK);
 		rectangle.setStrokeWidth(2);
 		
-		this.locationx = x + 50;
-		this.locationy = y + 50;
+		this.locationX = x + 50;
+		this.locationY = y + 50;
 		
 		for(int i=0;i<5;i++) {
 			Random rand = new Random();

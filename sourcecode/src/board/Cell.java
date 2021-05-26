@@ -8,7 +8,7 @@ public class Cell {
 	public ArrayList<Stone> num_stone = new ArrayList<Stone>();
 	public Text text = new Text("5");
 	
-	public double locationx;
-	public double locationy;
+	public double locationX;
+	public double locationY;
 
 }
