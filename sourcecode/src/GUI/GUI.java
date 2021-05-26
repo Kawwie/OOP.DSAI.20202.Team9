@@ -11,27 +11,27 @@ import javafx.application.Application;
 public class GUI extends Application {
 	
 	
-	PlayScene a;
-	RuleScene b;
-	MainScene c;
-	ExitScene d;
+	PlayScene playscene;
+	RuleScene rulescene;
+	MainScene mainscene;
+	ExitScene exitscene;
 	
 	
 	@Override
 	public void start(Stage stage) {
 		
 		 
-	    a = new PlayScene();
-	    Scene playScene = a.playScene();
+	    playscene = new PlayScene();
+	    Scene playScene = playscene.playScene();
 	    
-	    b = new RuleScene();
-	    Scene ruleScene = b.ruleScene();
+	    rulescene = new RuleScene();
+	    Scene ruleScene = rulescene.ruleScene();
 	    
-	    c = new MainScene();
-	    Scene mainScene = c.mainScene();
+	    mainscene = new MainScene();
+	    Scene mainScene = mainscene.mainScene();
 	    
-	    d = new ExitScene();
-	    Scene exitScene = d.exitScene();
+	    exitscene = new ExitScene();
+	    Scene exitScene = exitscene.exitScene();
 	    
 	    //first scene when running
 	    stage.setScene(mainScene);
@@ -40,12 +40,12 @@ public class GUI extends Application {
 
 		
 
-	    c.playbtn.setOnAction(e -> stage.setScene(playScene));
-		b.returnbtn.setOnAction(e -> stage.setScene(mainScene));
-		c.rulebtn.setOnAction(e -> stage.setScene(ruleScene));		
-		d.yesbtn.setOnAction(e -> stage.close());
-		d.nobtn.setOnAction(e -> stage.setScene(mainScene));
-		c.exitbtn.setOnAction(e -> stage.setScene(exitScene));
+	    mainscene.playbtn.setOnAction(e -> stage.setScene(playScene));
+		rulescene.returnbtn.setOnAction(e -> stage.setScene(mainScene));
+		mainscene.rulebtn.setOnAction(e -> stage.setScene(ruleScene));		
+		exitscene.yesbtn.setOnAction(e -> stage.close());
+		exitscene.nobtn.setOnAction(e -> stage.setScene(mainScene));
+		mainscene.exitbtn.setOnAction(e -> stage.setScene(exitScene));
 
 
 	      stage.show();         

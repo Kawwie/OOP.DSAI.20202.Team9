@@ -1,5 +1,6 @@
 package board;
 
+import java.util.Random;
 import javafx.event.EventHandler;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
@@ -18,29 +19,20 @@ public class NormalCell extends Cell{
 	public ContextMenu contextmenu = new ContextMenu(clockwise, counter_clockwise);
 	
 	
-	public int countStone() {
-		return this.num_stone.size();
-	}
-	
-	
 	public NormalCell(double x, double y, int pos) {
 		
+		rectangle.setStroke(Color.BLACK);
+		rectangle.setStrokeWidth(2);
 		
 		this.locationx = x + 50;
 		this.locationy = y + 50;
 		
+		for(int i=0;i<5;i++) {
+			Random rand = new Random();
+			Stone stone = new Stone(x + rand.nextInt(50) + 30, y + rand.nextInt(50) + 30);
+			num_stone.add(stone);
+		}
 		
-		Stone stone1 = new Stone(x + 50, y + 50);
-		Stone stone2 = new Stone(x + 50, y + 50);
-		Stone stone3 = new Stone(x + 50, y + 50);
-		Stone stone4 = new Stone(x + 50, y + 50);
-		Stone stone5 = new Stone(x + 50, y + 50);
-		
-		num_stone.add(stone1);
-		num_stone.add(stone2);
-		num_stone.add(stone3);
-		num_stone.add(stone4);
-		num_stone.add(stone5);
 		
 		this.pos = pos;
 		this.rectangle.setX(x);
