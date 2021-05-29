@@ -34,6 +34,7 @@ public class GUI extends Application {
 	    //first scene when running
 	    stage.setScene(mainScene);
 	   
+	
 
 		
 
@@ -45,7 +46,7 @@ public class GUI extends Application {
 		mainscene.exitbtn.setOnAction(e -> stage.setScene(exitScene));
 
 
-	      stage.show();         
+	    stage.show();         
 	  } 
 		
 	

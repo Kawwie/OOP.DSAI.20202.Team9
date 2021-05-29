@@ -10,7 +10,7 @@ public class PlayScene  {
 	private Scene playScene;
     public Scene playScene() {
        Group root = board.board();
-	   playScene = new Scene(root, 1000, 800, Color.ALICEBLUE);
+	   playScene = new Scene(root, 1000, 600, Color.ALICEBLUE);
 	   return playScene;
     }	       
 }

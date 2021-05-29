@@ -1,5 +1,7 @@
 package board;
 
+import board.player.Player;
+import board.stone.Stone;
 import javafx.animation.PathTransition;
 import javafx.animation.SequentialTransition;
 import javafx.event.ActionEvent;
@@ -13,7 +15,12 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+
 import java.util.Random;
+
+import board.cell.Cell;
+import board.cell.KingCell;
+import board.cell.NormalCell;
 
 public class Board {
 	
@@ -74,9 +81,6 @@ public class Board {
  	   root.getChildren().addAll(c9.rectangle, c9.text);
  	   root.getChildren().addAll(c10.rectangle, c10.text);
  	   root.getChildren().addAll(c11.rectangle, c11.text);
- 	  
- 	   
- 	   //add player cell
  	   root.getChildren().addAll(player1.cellPlace, player2.cellPlace);
  	   
  	   //add player turn
