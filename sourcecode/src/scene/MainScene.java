@@ -11,8 +11,9 @@ public class MainScene {
 	public Button playbtn = new Button("Play");
 	public Button rulebtn = new Button("Rule");
 	public Button exitbtn = new Button("Exit");
-	public Text text = new Text(400, 100, "O AN QUAN");
-	public Group root = new Group(text, rulebtn, exitbtn, playbtn);
+	private Text text = new Text(400, 100, "O AN QUAN");
+	private Group root = new Group(text, rulebtn, exitbtn, playbtn);
+	private Scene mainScene;
 	
 	public Scene mainScene() {
 		
@@ -26,7 +27,7 @@ public class MainScene {
 		exitbtn.setLayoutY(400);
 		exitbtn.setLayoutX(500);
 		
-		Scene mainScene = new Scene(root, 1000, 600, Color.WHEAT);
+		mainScene = new Scene(root, 1000, 600, Color.WHEAT);
 		
 		return mainScene;
 	}

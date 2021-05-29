@@ -28,4 +28,24 @@ public class KingCell extends Cell {
 		text.setY(y-70);
 		
 	}
+	
+	public KingCell(int pos) {
+		this.pos = pos;
+	}
+	
+	public KingCell(Color color) {
+		circle.setFill(color);
+	}
+	
+	
+	
+	
+	
+	public void setLocation(double x, double y) {
+		int k = (this.pos < 6) ? -50 : 50;
+		this.locationX = x + k;
+		this.locationY = y;
+		
+		
+	}
 }

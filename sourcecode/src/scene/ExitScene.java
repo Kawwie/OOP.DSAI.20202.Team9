@@ -9,8 +9,9 @@ public class ExitScene {
 	
 	public Button yesbtn = new Button("Yes");
 	public Button nobtn = new Button("No");
-	public Text confirmexit = new Text("Are you sure want to quit");
-	Group root = new Group(confirmexit, yesbtn, nobtn);
+	private Text confirmexit = new Text("Are you sure want to quit");
+	private Group root = new Group(confirmexit, yesbtn, nobtn);
+	private Scene exitScene;
 	
 	public Scene exitScene() {
 		
@@ -18,7 +19,7 @@ public class ExitScene {
 		nobtn.setLayoutY(300);
 		yesbtn.setLayoutX(500);
 		nobtn.setLayoutX(500);
-		Scene exitScene = new Scene(root, 1000, 600, Color.WHEAT);
+		exitScene = new Scene(root, 1000, 600, Color.WHEAT);
 		
 		return exitScene;
 	}

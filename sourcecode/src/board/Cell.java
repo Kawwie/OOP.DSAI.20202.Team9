@@ -2,7 +2,7 @@ package board;
 import java.util.ArrayList;
 import javafx.scene.text.Text;
 
-public class Cell {
+public abstract class Cell {
 	
 	public int pos;
 	public ArrayList<Stone> num_stone = new ArrayList<Stone>();
@@ -10,5 +10,9 @@ public class Cell {
 	
 	public double locationX;
 	public double locationY;
-
+	
+	public abstract void setLocation(double x, double y);
+	
+	
+	
 }

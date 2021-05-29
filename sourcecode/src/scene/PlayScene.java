@@ -6,10 +6,11 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 
 public class PlayScene  {
-	Board board = new Board();
+	private Board board = new Board();
+	private Scene playScene;
     public Scene playScene() {
        Group root = board.board();
-	   Scene scene = new Scene(root, 1000, 800, Color.ALICEBLUE);
-	   return scene;
+	   playScene = new Scene(root, 1000, 800, Color.ALICEBLUE);
+	   return playScene;
     }	       
 }

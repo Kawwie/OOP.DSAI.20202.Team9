@@ -29,4 +29,15 @@ public class Player {
 
 	}
 	
+	public Player(double x, double y, Font z) {
+		this.cellPlace.setX(x);
+		this.cellPlace.setY(y);
+		cellPlace.setStrokeWidth(2);
+		cellPlace.setStroke(Color.BLACK);
+		text.setX(x);
+		text.setY(y-20);
+
+	}
+	
+	
 }

@@ -18,42 +18,42 @@ import java.util.Random;
 public class Board {
 	
 	
-	int turn = 0;
+	private int turn = 0;
 	
-	int pointer;
+	private int pointer;
 	
 	//set up turn
-	Text playerTurn = new Text(100, 100, "PLayer 1 turn");
+	private Text playerTurn = new Text(100, 100, "PLayer 1 turn");
 	
 	
 	//finish text
-	Text result = new Text(300, 550, "");
+	private Text result = new Text(300, 550, "");
 	
 	//set up player
-	Player player2 = new Player(750, 50);
-	Player player1 = new Player(50, 450);
+	private Player player2 = new Player(750, 50);
+	private Player player1 = new Player(50, 450);
 	
 	
 	
 	//setting up the board cell
-	KingCell c0 = new KingCell(225, 300, 0);
-	NormalCell c1 = new NormalCell(225, 200, 1);
-    NormalCell c2 = new NormalCell(325, 200, 2);
-    NormalCell c3 = new NormalCell(425, 200, 3);
-    NormalCell c4 = new NormalCell(525, 200, 4);
-    NormalCell c5 = new NormalCell(625, 200, 5);
-    KingCell c6 = new KingCell(725, 300, 6);
-    NormalCell c11 = new NormalCell(225, 300, 11);
-    NormalCell c10 = new NormalCell(325, 300, 10);
-    NormalCell c9 = new NormalCell(425, 300, 9);
-    NormalCell c8 = new NormalCell(525, 300, 8);
-    NormalCell c7 = new NormalCell(625, 300, 7);
+	private KingCell c0 = new KingCell(225, 300, 0);
+	private NormalCell c1 = new NormalCell(225, 200, 1);
+    private NormalCell c2 = new NormalCell(325, 200, 2);
+    private NormalCell c3 = new NormalCell(425, 200, 3);
+    private NormalCell c4 = new NormalCell(525, 200, 4);
+    private NormalCell c5 = new NormalCell(625, 200, 5);
+    private KingCell c6 = new KingCell(725, 300, 6);
+    private NormalCell c11 = new NormalCell(225, 300, 11);
+    private NormalCell c10 = new NormalCell(325, 300, 10);
+    private NormalCell c9 = new NormalCell(425, 300, 9);
+    private NormalCell c8 = new NormalCell(525, 300, 8);
+    private NormalCell c7 = new NormalCell(625, 300, 7);
     
     
     //setting up the board
-    Cell[] board = {c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11};
+    private Cell[] board = {c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11};
     
-    Group root = new Group();
+    private Group root = new Group();
     
     
     public Group board() {
@@ -106,7 +106,7 @@ public class Board {
     }	
 	
 	 // setactionlistener function
-    public void setActionListener(NormalCell normalcell) {
+    private void setActionListener(NormalCell normalcell) {
     	
     	normalcell.clockwise.setOnAction(new EventHandler<ActionEvent>() {
     		public void handle(ActionEvent e) {
@@ -239,7 +239,7 @@ public class Board {
     }
     
     // move function
-    public void moveclockwise(NormalCell cell, SequentialTransition sequentialtransition) {
+    private void moveclockwise(NormalCell cell, SequentialTransition sequentialtransition) {
     	pointer = cell.pos%12 + 12;
     	int rocks = cell.num_stone.size();
     	for(int i=0;i< rocks;i++) {
@@ -301,7 +301,7 @@ public class Board {
 
     }
     
-    public void countermoveclockwise(NormalCell cell, SequentialTransition sequentialtransition) {
+    private void countermoveclockwise(NormalCell cell, SequentialTransition sequentialtransition) {
     	pointer = cell.pos%12 + 12;
     	int rocks = cell.num_stone.size();    	
     	for(int i=0;i< rocks;i++) {
@@ -361,7 +361,7 @@ public class Board {
     }
     	
     	
-    public void takeStone(Cell cell, SequentialTransition sequentialtransition) {
+    private void takeStone(Cell cell, SequentialTransition sequentialtransition) {
     	if (turn%2 == 0) {
     		for(Stone stone : cell.num_stone) {
     		   Path path = new Path();
@@ -402,7 +402,7 @@ public class Board {
     	}
     }
     
-    public boolean checkWinning() {
+    private boolean checkWinning() {
     	if (c0.num_stone.size() + c6.num_stone.size() == 0) {
     		return true;
     	}
@@ -411,7 +411,7 @@ public class Board {
     
      
     //return stone to  cell if there is no cell on the turn
-    public void returnStone(SequentialTransition sequentialtransition) {
+    private void returnStone(SequentialTransition sequentialtransition) {
     	if(turn%2==0) {	
     		if(board[7].num_stone.size() + board[8].num_stone.size() + board[9].num_stone.size() + board[10].num_stone.size() + board[11].num_stone.size() == 0) {
 	    		if(player1.num_stone.size() < 5) {
@@ -471,7 +471,7 @@ public class Board {
     
     
     //for printing number of stones
-	public void printBoard() {
+	private void printBoard() {
 		for (Cell cell : board) {
 			cell.text.setText("" + cell.num_stone.size());
 		}

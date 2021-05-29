@@ -1,10 +1,8 @@
 package GUI;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import scene.ExitScene;
-import scene.MainScene;
-import scene.PlayScene;
-import scene.RuleScene;
+
+import scene.*;
 import javafx.application.Application;
 
 
@@ -36,7 +34,6 @@ public class GUI extends Application {
 	    //first scene when running
 	    stage.setScene(mainScene);
 	   
-	
 
 		
 

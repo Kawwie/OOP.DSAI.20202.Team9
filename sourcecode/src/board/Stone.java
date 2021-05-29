@@ -17,4 +17,12 @@ public class Stone extends Circle {
 		this.setFill(Color.rgb(rand.nextInt(226), rand.nextInt(226), rand.nextInt(226)));
 	}
 	
+	
+	public Stone(double centerX, double centerY, Color color) {
+		this.setCenterX(centerX);
+		this.setCenterY(centerY);
+		this.setFill(color);
+		
+	}
+	
 }
