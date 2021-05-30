@@ -119,16 +119,7 @@ public class Board {
     	
     	normalcell.clockwise.setOnAction(new EventHandler<ActionEvent>() {
     		public void handle(ActionEvent e) {
-    			String path1 = "sourcecode/src/audio/clicksound.mp3";
     			
-    			 Media media = new Media(new File(path1).toURI().toString());  
-    		     
-    		     //Instantiating MediaPlayer class   
-    		     MediaPlayer mediaPlayer = new MediaPlayer(media);  
-    		       
-    		     //by setting this property to true, the audio will be played   
-    		    
-    			mediaPlayer.play();
     			SequentialTransition sequentialtransition = new SequentialTransition();
     			moveclockwise(normalcell, sequentialtransition);
     			
@@ -193,16 +184,6 @@ public class Board {
     	
     	normalcell.counter_clockwise.setOnAction(new EventHandler<ActionEvent>() {
     		public void handle(ActionEvent e) {
-    			String path1 = "sourcecode/src/audio/clicksound.mp3";
-    			
-   			 Media media = new Media(new File(path1).toURI().toString());  
-   		     
-   		     //Instantiating MediaPlayer class   
-   		     MediaPlayer mediaPlayer = new MediaPlayer(media);  
-   		       
-   		     //by setting this property to true, the audio will be played   
-   		    
-   			mediaPlayer.play();
     			SequentialTransition sequentialtransition = new SequentialTransition();
     			countermoveclockwise(normalcell, sequentialtransition);
     			
