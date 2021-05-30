@@ -419,7 +419,7 @@ public class Board {
     	if(turn%2==0) {	
     		if(board[7].num_stone.size() + board[8].num_stone.size() + board[9].num_stone.size() + board[10].num_stone.size() + board[11].num_stone.size() == 0) {
 	    		if(player1.num_stone.size() < 5) {
-	    			System.out.println("Player 2 win");
+	    			result.setText("Player 2 win!");
 	    		}
 	    		else {
 	    			for(int i=7;i<=11;i++) {
@@ -446,7 +446,7 @@ public class Board {
     	else {
     		if(board[1].num_stone.size() + board[2].num_stone.size() + board[3].num_stone.size() + board[4].num_stone.size() + board[5].num_stone.size() == 0) {
 	    		if(player2.num_stone.size() < 5) {
-	    			System.out.println("Player 1 win");
+	    			result.setText("Player 1 win!");
 	    		}
 	    		else {
 	    			for(int i=1;i<=5;i++) {
