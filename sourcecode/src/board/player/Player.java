@@ -41,5 +41,19 @@ public class Player {
 
 	}
 	
+	public Player(double x, double y, String input_text) {
+		
+		text.setText(input_text);
+
+		text.setFont(Font.font("verdana", FontWeight.SEMI_BOLD, FontPosture.ITALIC, 15));
+		this.cellPlace.setX(x);
+		this.cellPlace.setY(y);
+		cellPlace.setStrokeWidth(2);
+		cellPlace.setStroke(Color.BLACK);
+		text.setX(x);
+		text.setY(y-20);
+
+	}
+	
 	
 }

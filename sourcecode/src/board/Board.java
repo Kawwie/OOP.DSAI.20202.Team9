@@ -7,6 +7,9 @@ import javafx.animation.SequentialTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import java.io.File;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
@@ -24,6 +27,8 @@ import board.cell.NormalCell;
 
 public class Board {
 	
+
+	
 	
 	private int turn = 0;
 	
@@ -37,8 +42,8 @@ public class Board {
 	private Text result = new Text(300, 550, "");
 	
 	//set up player
-	private Player player2 = new Player(750, 50);
-	private Player player1 = new Player(50, 450);
+	private Player player2 = new Player(750, 50, "Player 2 score: ");
+	private Player player1 = new Player(50, 450, "Player 1 score: " );
 	
 	
 	
@@ -114,6 +119,16 @@ public class Board {
     	
     	normalcell.clockwise.setOnAction(new EventHandler<ActionEvent>() {
     		public void handle(ActionEvent e) {
+    			String path1 = "sourcecode/src/audio/clicksound.mp3";
+    			
+    			 Media media = new Media(new File(path1).toURI().toString());  
+    		     
+    		     //Instantiating MediaPlayer class   
+    		     MediaPlayer mediaPlayer = new MediaPlayer(media);  
+    		       
+    		     //by setting this property to true, the audio will be played   
+    		    
+    			mediaPlayer.play();
     			SequentialTransition sequentialtransition = new SequentialTransition();
     			moveclockwise(normalcell, sequentialtransition);
     			
@@ -178,6 +193,16 @@ public class Board {
     	
     	normalcell.counter_clockwise.setOnAction(new EventHandler<ActionEvent>() {
     		public void handle(ActionEvent e) {
+    			String path1 = "sourcecode/src/audio/clicksound.mp3";
+    			
+   			 Media media = new Media(new File(path1).toURI().toString());  
+   		     
+   		     //Instantiating MediaPlayer class   
+   		     MediaPlayer mediaPlayer = new MediaPlayer(media);  
+   		       
+   		     //by setting this property to true, the audio will be played   
+   		    
+   			mediaPlayer.play();
     			SequentialTransition sequentialtransition = new SequentialTransition();
     			countermoveclockwise(normalcell, sequentialtransition);
     			
