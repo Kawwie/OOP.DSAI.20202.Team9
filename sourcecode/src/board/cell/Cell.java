@@ -15,6 +15,4 @@ public abstract class Cell {
 	
 	public abstract void setLocation(double x, double y);
 	
-	
-	
 }

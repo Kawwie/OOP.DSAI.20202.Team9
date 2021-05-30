@@ -40,7 +40,7 @@ public class Board {
 	
 	//set up player
 	private Player player2 = new Player(750, 50, "Player 2 score: ");
-	private Player player1 = new Player(50, 450, "Player 1 score: " );
+	private Player player1 = new Player(50, 450);
 	
 	
 	

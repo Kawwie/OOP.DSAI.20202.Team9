@@ -14,7 +14,7 @@ public class Player {
 
 	
 	
-	public Text text = new Text("Player score:");
+	public Text text = new Text("Player 1 score:");
 	public Rectangle cellPlace = new Rectangle(125, 125, Color.BURLYWOOD);
 	public ArrayList<Stone> num_stone = new ArrayList<Stone>();
 	public Player(double x, double y) {

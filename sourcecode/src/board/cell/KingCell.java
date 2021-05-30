@@ -24,7 +24,7 @@ public class KingCell extends Cell {
 			Stone stone = new Stone( x- 20 + k + rand.nextInt(40), y - 20 + rand.nextInt(40));
 			num_stone.add(stone);
 		}	
-		text.setText("11");
+		text.setText("10");
 		text.setX(x+(k/2));
 		text.setY(y-70);
 		
