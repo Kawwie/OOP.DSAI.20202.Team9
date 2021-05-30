@@ -33,9 +33,6 @@ public class GUI extends Application {
 	    
 	    //first scene when running
 	    stage.setScene(mainScene);
-	   
-	
-
 		
 
 	    mainscene.playbtn.setOnAction(e -> stage.setScene(playScene));

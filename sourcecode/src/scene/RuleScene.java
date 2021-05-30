@@ -3,6 +3,9 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 public class RuleScene {
@@ -50,6 +53,8 @@ public class RuleScene {
 	private Scene ruleScene;
 	
 	public Scene ruleScene() {
+		
+		returnbtn.setFont((Font.font("verdana", FontWeight.SEMI_BOLD, FontPosture.ITALIC, 20)));
 		
 		ruleScene = new Scene(root, 1000, 600, Color.WHEAT);
 		return ruleScene;
