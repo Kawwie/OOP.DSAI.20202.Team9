@@ -2,6 +2,7 @@ package board.player;
 
 import java.util.ArrayList;
 
+import board.StoneHolder;
 import board.stone.Stone;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -10,9 +11,7 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-public class Player {
-
-	
+public class Player extends StoneHolder {
 	
 	public Text text = new Text("Player 1 score:");
 	public Rectangle cellPlace = new Rectangle(125, 125, Color.BURLYWOOD);
