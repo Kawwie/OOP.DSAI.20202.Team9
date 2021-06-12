@@ -1,19 +1,10 @@
-package scene;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
+package gui.scene.component;
+import gui.Button;
 import javafx.scene.text.Text;
 
-public class RuleScene {
-	
-	
+public class RulSceneComponent extends javafx.scene.Group {
 	public Button returnbtn = new Button("Return");
-	
-	private Text rule = new Text(100, 100, "Mục tiêu cần đạt được để giành chiến thắng: người thắng cuộc trong trò chơi này là người mà khi cuộc chơi kết thúc có tổng số dân quy đổi nhiều hơn."
+	final Text rule = new Text(100, 100, "Mục tiêu cần đạt được để giành chiến thắng: người thắng cuộc trong trò chơi này là người mà khi cuộc chơi kết thúc có tổng số dân quy đổi nhiều hơn."
 			+ "\n\n"
 			+ "Tùy theo luật chơi từng địa phương hoặc thỏa thuận giữa hai người chơi nhưng phổ biến là 1 quan được quy đổi bằng 10 dân hoặc 5 dân (cờ)."
 			+ "\n\n"
@@ -47,18 +38,7 @@ public class RuleScene {
 			+ "\n tình huống này được gọi là hết quan, tàn dân, thu quân, kéo về hay hết quan, tàn dân, thu quân, bán ruộng."
 			+ "\n Ô quan có ít dân (có số dân nhỏ hơn 5 phổ biến được coi là ít) gọi là quan non và để cuộc chơi không bị kết thúc sớm cho tăng phần thú vị,"
 			+ "\n luật chơi có thể quy định không được ăn quan non, nếu rơi vào tình huống đó sẽ bị mất lượt.");
-	
-	private Group root = new Group(returnbtn, rule);
-	
-	private Scene ruleScene;
-	
-	public Scene ruleScene() {
-		
-		returnbtn.setFont((Font.font("verdana", FontWeight.SEMI_BOLD, FontPosture.ITALIC, 20)));
-		
-		ruleScene = new Scene(root, 1000, 600, Color.WHEAT);
-		return ruleScene;
-		
+	public RulSceneComponent() {
+		this.getChildren().addAll(returnbtn, rule);
 	}
-
 }
