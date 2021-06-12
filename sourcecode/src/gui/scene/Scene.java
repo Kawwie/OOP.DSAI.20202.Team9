@@ -1,4 +1,4 @@
-package gui;
+package gui.scene;
 
 import javafx.scene.Parent;
 import javafx.scene.paint.Color;

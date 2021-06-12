@@ -45,7 +45,7 @@ public class Board {
 	
 	//set up player
 	private Player player2 = new Player(750, 50, "Player 2 score: ");
-	private Player player1 = new Player(50, 450);
+	private Player player1 = new Player(50, 450, "Player 1 score: ");
 	
 	
 	
@@ -124,13 +124,14 @@ public class Board {
     }
     
     public void move(NormalCell cell) {
+    	
     	int k = (direction) ? 1 : -1;
     	
     	
     	pointer = cell.pos%12 + 12;
     	int numberOfStone = cell.num_stone.size();
-    	for(int i=0;i< numberOfStone;i++) {
-			   pointer +=1;
+    	for(int i=0;i<numberOfStone;i++) {
+			   pointer +=k;
 			   Stone stone = cell.num_stone.get(0);
 			   cell.num_stone.remove(0); 
 			   sequentialTransition.getChildren().add(stoneMove(stone, board[pointer%12]));
@@ -217,6 +218,7 @@ public class Board {
     	normalcell.counter_clockwise.setOnAction(new EventHandler<ActionEvent>() {
     		public void handle(ActionEvent e) {
     			direction = false;
+    			sequentialTransition = new SequentialTransition();
     			move(normalcell);
     			
     			if (checkWinning()) {

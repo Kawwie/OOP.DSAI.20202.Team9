@@ -1,4 +1,4 @@
-package scene;
+package gui.scene.component;
 
 
 import gui.Button;
@@ -7,13 +7,13 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-public class MainScene extends javafx.scene.Group{
+public class MainSceneComponent extends javafx.scene.Group{
 	public Button playbtn = new Button("Play");
 	public Button rulebtn = new Button("Rule");
 	public Button exitbtn = new Button("Exit");
 	private final Text text = new Text(300, 100, "O AN QUAN");
 
-	public MainScene() {
+	public MainSceneComponent() {
 		
 		playbtn.setLayoutX(475);
 		playbtn.setLayoutY(200);

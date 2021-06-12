@@ -1,8 +1,8 @@
-package scene;
+package gui.scene.component;
 import gui.Button;
 import javafx.scene.text.Text;
 
-public class RuleScene extends javafx.scene.Group {
+public class RulSceneComponent extends javafx.scene.Group {
 	public Button returnbtn = new Button("Return");
 	final Text rule = new Text(100, 100, "Mục tiêu cần đạt được để giành chiến thắng: người thắng cuộc trong trò chơi này là người mà khi cuộc chơi kết thúc có tổng số dân quy đổi nhiều hơn."
 			+ "\n\n"
@@ -38,7 +38,7 @@ public class RuleScene extends javafx.scene.Group {
 			+ "\n tình huống này được gọi là hết quan, tàn dân, thu quân, kéo về hay hết quan, tàn dân, thu quân, bán ruộng."
 			+ "\n Ô quan có ít dân (có số dân nhỏ hơn 5 phổ biến được coi là ít) gọi là quan non và để cuộc chơi không bị kết thúc sớm cho tăng phần thú vị,"
 			+ "\n luật chơi có thể quy định không được ăn quan non, nếu rơi vào tình huống đó sẽ bị mất lượt.");
-	public RuleScene() {
+	public RulSceneComponent() {
 		this.getChildren().addAll(returnbtn, rule);
 	}
 }

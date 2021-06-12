@@ -2,18 +2,22 @@ package gui;
 
 import javafx.stage.Stage;
 
-import scene.*;
+import gui.scene.Scene;
+import gui.scene.component.ExitSceneComponent;
+import gui.scene.component.MainSceneComponent;
+import gui.scene.component.PlaySceneComponent;
+import gui.scene.component.RulSceneComponent;
 import javafx.application.Application;
 
 
 public class GUI extends Application {
-	ExitScene exitSceneComponent = new ExitScene(); 
+	ExitSceneComponent exitSceneComponent = new ExitSceneComponent(); 
 	Scene exitScene = new Scene(exitSceneComponent);
-	MainScene mainSceneComponent = new MainScene();
+	MainSceneComponent mainSceneComponent = new MainSceneComponent();
 	Scene mainScene = new Scene(mainSceneComponent);
-	PlayScene playSceneComponent = new PlayScene();
+	PlaySceneComponent playSceneComponent = new PlaySceneComponent();
 	Scene playScene = new Scene(playSceneComponent);
-	RuleScene ruleSceneComponent = new RuleScene();
+	RulSceneComponent ruleSceneComponent = new RulSceneComponent();
 	Scene ruleScene = new Scene(ruleSceneComponent);
 	
 	

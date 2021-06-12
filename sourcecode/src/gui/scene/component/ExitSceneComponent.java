@@ -1,15 +1,15 @@
-package scene;
+package gui.scene.component;
 import gui.Button;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-public class ExitScene extends javafx.scene.Group{
+public class ExitSceneComponent extends javafx.scene.Group{
 	public Button yesbtn = new Button("Yes");
 	public Button nobtn = new Button("No");
 	private Text confirmexit = new Text("Are you sure want to quit ?");
-	public ExitScene() {
+	public ExitSceneComponent() {
 		confirmexit.setFont(Font.font("verdana", FontWeight.SEMI_BOLD, FontPosture.ITALIC, 40));
 		confirmexit.setLayoutX(250);
 		confirmexit.setLayoutY(100);

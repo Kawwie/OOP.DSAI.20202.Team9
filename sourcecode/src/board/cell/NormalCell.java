@@ -16,8 +16,6 @@ import javafx.scene.shape.Rectangle;
 public class NormalCell extends Cell{
 	
 	public Rectangle rectangle = new Rectangle(100, 100, Color.FORESTGREEN);
-	
-	
 	public MenuItem clockwise = new MenuItem("Clockwise");
 	public MenuItem counter_clockwise = new MenuItem("Counter ClockWise");
 	public ContextMenu contextmenu = new ContextMenu(clockwise, counter_clockwise);
@@ -81,13 +79,6 @@ public class NormalCell extends Cell{
 			}
 		});
 	}
-	
-	public NormalCell(int pos) {
-		this.pos = pos;
-	}
-	
-	
-	
 	public void setLocation(double x, double y) {
 		this.locationX = x + 50;
 		this.locationY = y + 50;
