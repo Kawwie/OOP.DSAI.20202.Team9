@@ -1,7 +1,7 @@
 package board;
 
-import board.player.Player;
-import board.stone.Stone;
+import board.stone.*;
+import board.player.*;
 import javafx.animation.PathTransition;
 import javafx.animation.SequentialTransition;
 import javafx.event.ActionEvent;
@@ -18,16 +18,11 @@ import javafx.util.Duration;
 
 import java.util.Random;
 
-import board.cell.Cell;
+import board.cell.*;
 import board.cell.KingCell;
 import board.cell.NormalCell;
 
 public class Board {
-	
-	SequentialTransition sequentialTransition;
-	
-	
-	boolean direction;
 	
 
 	
@@ -75,93 +70,145 @@ public class Board {
   
        result.setFont(Font.font("verdana", FontWeight.SEMI_BOLD, FontPosture.ITALIC, 80));
        playerTurn.setFont(Font.font("verdana", FontWeight.SEMI_BOLD, FontPosture.ITALIC, 30));
-       
-       
-       
-       NormalCell[] normalcell = { c1, c2, c3, c4, c5, c7, c8, c9, c10, c11};
-       KingCell[] kingcell = { c0, c6 };
-       Player[] player = { player1, player2 };
-       
-       for (Player i : player) {
-    	   root.getChildren().addAll(i.cellPlace, i.text);
-       }
-       for (KingCell i : kingcell) {
-    	   root.getChildren().addAll(i.circle, i.text);
-       }
-       for (NormalCell i : normalcell) {
-    	   setActionListener(i);
-    	   root.getChildren().addAll(i.rectangle, i.text);
-       }
-       
-       for (Cell i : board) {
-    	   root.getChildren().addAll(i.num_stone);
-       }
+    	
+       root.getChildren().addAll(c0.circle, c0.text);
+       root.getChildren().addAll(c6.circle, c6.text);
+       root.getChildren().addAll(c1.rectangle, c1.text);
+ 	   root.getChildren().addAll(c2.rectangle, c2.text);
+ 	   root.getChildren().addAll(c3.rectangle, c3.text);
+ 	   root.getChildren().addAll(c4.rectangle, c4.text);
+ 	   root.getChildren().addAll(c5.rectangle, c5.text);
+ 	   root.getChildren().addAll(c7.rectangle, c7.text);
+ 	   root.getChildren().addAll(c8.rectangle, c8.text);
+ 	   root.getChildren().addAll(c9.rectangle, c9.text);
+ 	   root.getChildren().addAll(c10.rectangle, c10.text);
+ 	   root.getChildren().addAll(c11.rectangle, c11.text);
+ 	   root.getChildren().addAll(player1.cellPlace, player2.cellPlace);
+ 	   
+ 	   //add player turn
+ 	   root.getChildren().add(playerTurn);
+ 	   root.getChildren().add(result);
+ 	   
+ 	   
+ 	   //add player text
+ 	   root.getChildren().addAll(player1.text, player2.text);
+ 	   
+ 	   
+ 	   //add stone to the board
+ 	   for(Cell i : board) {
+ 		   root.getChildren().addAll(i.num_stone);
+ 	   }
+ 	   
 
-       
-       
- 	   root.getChildren().addAll(playerTurn, result);
  	   
- 	   
+ 	   //add actionlistener to the board
+ 	   for (int i=7;i<12;i++) {
+		   ((NormalCell) board[i]).contextMenuListener.setActive(true);
+ 	   		setActionListener((NormalCell) board[i]);
+ 	   }
+		for (int i=1;i<6;i++) {
+			setActionListener((NormalCell) board[i]);
+		}
  	   return root;
- 	   
+
+    }	
+	
+	 // setactionlistener function
+    private void setActionListener(NormalCell normalcell) {
+    	
+    	normalcell.clockwise.setOnAction(new EventHandler<ActionEvent>() {
+    		public void handle(ActionEvent e) {
+				for (int i=0;i<11;i++) {
+					if(i!= 0 && i != 6){
+						((NormalCell)board[i]).contextMenuListener.setActive(!((NormalCell)board[i]).contextMenuListener.getActive());
+						if (((NormalCell)board[i]).num_stone.size() == 0){
+							((NormalCell)board[i]).contextMenuListener.setActive(false);
+						}
+					}
+				}
+    			SequentialTransition sequentialtransition = new SequentialTransition();
+    			moveclockwise(normalcell, sequentialtransition);
+
+    			checkWinning(sequentialtransition);
+    			turn +=1;
+
+				playerTurn.setText("Player " + (turn%2+1) + " turn");
+    			returnStone(sequentialtransition);
+
+    	        sequentialtransition.play();
+    	    	printBoard();
+    		}
+    	});
+
+
+    	normalcell.counter_clockwise.setOnAction(new EventHandler<ActionEvent>() {
+    		public void handle(ActionEvent e) {
+    			SequentialTransition sequentialtransition = new SequentialTransition();
+    			countermoveclockwise(normalcell, sequentialtransition);
+
+    			checkWinning(sequentialtransition);
+    			turn +=1;
+    			playerTurn.setText("Player " + (turn%2+1) + " turn");
+    			returnStone(sequentialtransition);
+
+    			sequentialtransition.play();
+    	    	printBoard();
+
+    		}
+    	});
     }
     
-    public PathTransition stoneMove(Stone stone, StoneHolder stoneHolder) {
-    	Path path = new Path();
-    	path.getElements().add(new MoveTo(stone.getCenterX(), stone.getCenterY()));
-    	Random rand = new Random();
-	    double x = stoneHolder.locationX + rand.nextInt(20) - 10;
-		double y = stoneHolder.locationY + rand.nextInt(20) - 10;
-		path.getElements().add(new LineTo(x, y));
-		PathTransition pathTransition = new PathTransition();  
-		pathTransition.setDuration(Duration.millis(500));  
-		pathTransition.setNode(stone);  
-		pathTransition.setPath(path);
-		stone.setCenterX(x);
-		stone.setCenterY(y);
-		stoneHolder.num_stone.add(stone);
-		return pathTransition;
-    }
-    
-    public void move(NormalCell cell) {
-    	
-    	int k = (direction) ? 1 : -1;
-    	
-    	
+    // move function
+    private void moveclockwise(NormalCell cell, SequentialTransition sequentialtransition) {
     	pointer = cell.pos%12 + 12;
-    	int numberOfStone = cell.num_stone.size();
-    	for(int i=0;i<numberOfStone;i++) {
-			   pointer +=k;
+    	int rocks = cell.num_stone.size();
+    	for(int i=0;i< rocks;i++) {
+			   pointer +=1;
 			   Stone stone = cell.num_stone.get(0);
-			   cell.num_stone.remove(0); 
-			   sequentialTransition.getChildren().add(stoneMove(stone, board[pointer%12]));
+			   cell.num_stone.remove(0);
+			   Path path = new Path();
+			   path.getElements().add(new MoveTo(stone.getCenterX(), stone.getCenterY()));
+			   Random rand = new Random();
+			   double x = board[pointer%12].locationX + rand.nextInt(20) - 10;
+			   double y = board[pointer%12].locationY + rand.nextInt(20) - 10;
+			   path.getElements().add(new LineTo(x, y));
+			   PathTransition pathTransition = new PathTransition();  
+			   pathTransition.setDuration(Duration.millis(500));  
+			   pathTransition.setNode(stone);  
+			   pathTransition.setPath(path);  
+			   sequentialtransition.getChildren().add(pathTransition);
+			   stone.setCenterX(x);
+			   stone.setCenterY(y);
+			   board[pointer%12].num_stone.add(stone);
+			   
 	   }
     	
     	//check if can pick again
-    	
-    	if(!((pointer+k)%12 == 0 || (pointer+k)%12 ==6)) {
-    		if (board[(pointer+k)%12].num_stone.size() != 0) {
-    			move(((NormalCell) board[(pointer+k)%12]));
+
+		//if next cell is NOT a half circle and contains stones then pick them up and move again
+    	if(!((pointer+1)%12 == 0 || (pointer+1)%12 ==6)) {
+    		if (board[(pointer+1)%12].num_stone.size() != 0) {
+    			moveclockwise(((NormalCell) board[(pointer+1)%12]), sequentialtransition);
     		}
     	}
-    	
-        if(board[(pointer+k)%12].num_stone.size() == 0 && board[(pointer+k*2)%12].num_stone.size() != 0) {
-            takeStone(board[(pointer+k*2)%12]);
-            board[(pointer+k*2)%12].num_stone.clear();
-            if(board[(pointer+k*3)%12].num_stone.size() == 0 && board[(pointer+k*4)%12].num_stone.size() != 0) {
-                takeStone(board[(pointer+k*4)%12]);
-                board[(pointer+k*4)%12].num_stone.clear();
-                if(board[(pointer+k*5)%12].num_stone.size() == 0 && board[(pointer+k*6)%12].num_stone.size() != 0) {
-                    takeStone(board[(pointer+k*6)%12]);
-                    board[(pointer+k*6)%12].num_stone.clear();
-                    if(board[(pointer+k*7)%12].num_stone.size() == 0 && board[(pointer+k*8)%12].num_stone.size() != 0) {
-                        takeStone(board[(pointer+k*8)%12]);
-                        board[(pointer+k*8)%12].num_stone.clear(); 
-                        if(board[(pointer+k*9)%12].num_stone.size() == 0 && board[(pointer+k*8)%10].num_stone.size() != 0) {
-                            takeStone(board[(pointer+k*10)%12]);
-                            board[(pointer+k*10)%12].num_stone.clear();
-                            if(board[(pointer+k*11)%12].num_stone.size() == 0) {
-                                takeStone(board[pointer]);
+		//continue checking if next cell empty followed by a non-empty one then the player scored
+        if(board[(pointer+1)%12].num_stone.size() == 0 && board[(pointer+1*2)%12].num_stone.size() != 0) {
+            takeStone(board[(pointer+1*2)%12], sequentialtransition);
+            board[(pointer+1*2)%12].num_stone.clear();
+            if(board[(pointer+1*3)%12].num_stone.size() == 0 && board[(pointer+1*4)%12].num_stone.size() != 0) {
+                takeStone(board[(pointer+1*4)%12], sequentialtransition);
+                board[(pointer+1*4)%12].num_stone.clear();
+                if(board[(pointer+1*5)%12].num_stone.size() == 0 && board[(pointer+1*6)%12].num_stone.size() != 0) {
+                    takeStone(board[(pointer+1*6)%12], sequentialtransition);
+                    board[(pointer+1*6)%12].num_stone.clear();
+                    if(board[(pointer+1*7)%12].num_stone.size() == 0 && board[(pointer+1*8)%12].num_stone.size() != 0) {
+                        takeStone(board[(pointer+1*8)%12], sequentialtransition);
+                        board[(pointer+1*8)%12].num_stone.clear(); 
+                        if(board[(pointer+1*9)%12].num_stone.size() == 0 && board[(pointer+1*8)%10].num_stone.size() != 0) {
+                            takeStone(board[(pointer+1*10)%12], sequentialtransition);
+                            board[(pointer+1*10)%12].num_stone.clear();
+                            if(board[(pointer+1*11)%12].num_stone.size() == 0) {
+                                takeStone(board[pointer], sequentialtransition);
                                 board[pointer].num_stone.clear();
                             }
                         }
@@ -169,111 +216,165 @@ public class Board {
                 }
             }
         }
+    	
+
+
 
     }
-	
-	 // setactionlistener function
-    private void setActionListener(NormalCell normalcell) {
-    	
-    	normalcell.clockwise.setOnAction(new EventHandler<ActionEvent>() {
-    		public void handle(ActionEvent e) {
-    			direction = true;
-    			
-    			sequentialTransition = new SequentialTransition();
-    			move(normalcell);
-    			
-    			if (checkWinning()) {
-    				for (int i=7;i<=11;i++) {
-    					for(Stone stone : board[i].num_stone) {
-			 			   sequentialTransition.getChildren().add(stoneMove(stone, player1));
-    			    	}
-    				}
-    				for (int i=1;i<=5;i++) {
-    					for(Stone stone : board[i].num_stone) {
-    						sequentialTransition.getChildren().add(stoneMove(stone, player2));
-    			    	}
-    				}
-    				
-    				if (player1.num_stone.size() < player2.num_stone.size()) {
-    					result.setText("Player 2 win !");
-    					
-    				}
-    				else if (player1.num_stone.size() > player2.num_stone.size()) {
-    					result.setText("Player 1 win !");
-    				}
-    				else {
-    					result.setText("Draw !");
-    				}
-    			}
-    			turn +=1;
-    			playerTurn.setText("Player " + (turn%2+1) + " turn");
-    			returnStone(sequentialTransition);
-    			
-    	        sequentialTransition.play();
-    	    	printBoard();
+    
+    private void countermoveclockwise(NormalCell cell, SequentialTransition sequentialtransition) {
+    	pointer = cell.pos%12 + 12;
+    	int rocks = cell.num_stone.size();    	
+    	for(int i=0;i< rocks;i++) {
+		   
+		   pointer -=1;
+		   Path path = new Path();
+		   Stone stone = cell.num_stone.get(0);
+		   cell.num_stone.remove(0);
+		   path.getElements().add(new MoveTo(stone.getCenterX(), stone.getCenterY()));
+		   Random rand = new Random();
+		   double x = board[pointer%12].locationX + rand.nextInt(20) - 10;
+		   double y = board[pointer%12].locationY + rand.nextInt(20) - 10;
+		   path.getElements().add(new LineTo(x, y));
+		   PathTransition pathTransition = new PathTransition();  
+		   pathTransition.setDuration(Duration.millis(500));  
+		   pathTransition.setNode(stone);  
+		   pathTransition.setPath(path);  
+		   sequentialtransition.getChildren().add(pathTransition);
+		   stone.setCenterX(x);
+		   stone.setCenterY(y);
+		   board[pointer%12].num_stone.add(stone);
+	    }
+    	//check if can pick again
+    	if(!(((pointer-1)%12 == 0)|| (pointer-1)%12==6)) {
+    		if (board[(pointer-1)%12].num_stone.size() != 0) {
+    			countermoveclockwise(((NormalCell) board[(pointer-1)%12]), sequentialtransition);
     		}
-    	});
+    		
+    	}
     	
     	
-    	normalcell.counter_clockwise.setOnAction(new EventHandler<ActionEvent>() {
-    		public void handle(ActionEvent e) {
-    			direction = false;
-    			sequentialTransition = new SequentialTransition();
-    			move(normalcell);
-    			
-    			if (checkWinning()) {
-    				for (int i=7;i<=11;i++) {
-    					for(Stone stone : board[i].num_stone) { 
-    			 			   sequentialTransition.getChildren().add(stoneMove(stone, player1));
-    			    	}
-    				}
-    				for (int i=1;i<=5;i++) {
-    					for(Stone stone : board[i].num_stone) { 
-    			 			   sequentialTransition.getChildren().add(stoneMove(stone, player2));
-    			    	}
-    				}
-    				
-    				if (player1.num_stone.size() < player2.num_stone.size()) {
-    					result.setText("Player 2 win !");
-    					
-    				}
-    				else if (player1.num_stone.size() > player2.num_stone.size()) {
-    					result.setText("Player 1 win !");
-    				}
-    				else {
-    					result.setText("Draw !");
-    				}
-    			}
-    			
-    			turn +=1;
-    			playerTurn.setText("Player " + (turn%2+1) + " turn");
-
-    			returnStone(sequentialTransition);
-    	        sequentialTransition.play();
-    	    	printBoard();
-    			
-    		}
-    	});
+    	if(board[(pointer-1)%12].num_stone.size() == 0 && board[(pointer-1*2)%12].num_stone.size() != 0) {
+            takeStone(board[(pointer-1*2)%12], sequentialtransition);
+            board[(pointer-1*2)%12].num_stone.clear();
+            if(board[(pointer-1*3)%12].num_stone.size() == 0 && board[(pointer-1*4)%12].num_stone.size() != 0) {
+                takeStone(board[(pointer-1*4)%12], sequentialtransition);
+                board[(pointer-1*4)%12].num_stone.clear();
+                if(board[(pointer-1*5)%12].num_stone.size() == 0 && board[(pointer-1*6)%12].num_stone.size() != 0) {
+                    takeStone(board[(pointer-1*6)%12], sequentialtransition);
+                    board[(pointer-1*6)%12].num_stone.clear();
+                    if(board[(pointer-1*7)%12].num_stone.size() == 0 && board[(pointer-1*8)%12].num_stone.size() != 0) {
+                        takeStone(board[(pointer-1*8)%12], sequentialtransition);
+                        board[(pointer-1*8)%12].num_stone.clear(); 
+                        if(board[(pointer-1*9)%12].num_stone.size() == 0 && board[(pointer-1*8)%10].num_stone.size() != 0) {
+                            takeStone(board[(pointer-1*10)%12], sequentialtransition);
+                            board[(pointer-1*10)%12].num_stone.clear();
+                            if(board[(pointer-1*11)%12].num_stone.size() == 0) {
+                                takeStone(board[pointer], sequentialtransition);
+                                board[pointer].num_stone.clear();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    	
     }
     	
-    private void takeStone(Cell cell) {
+    	
+    private void takeStone(Cell cell, SequentialTransition sequentialtransition) {
     	if (turn%2 == 0) {
-    		for(Stone stone : cell.num_stone) { 
- 			   sequentialTransition.getChildren().add(stoneMove(stone, player1));
+    		for(Stone stone : cell.num_stone) {
+    		   Path path = new Path();
+ 			   path.getElements().add(new MoveTo(stone.getCenterX(), stone.getCenterY()));
+ 			   Random rand = new Random();
+ 			   double x = player1.cellPlace.getX() + rand.nextInt(50) + 30;
+ 			   double y = player1.cellPlace.getY() + rand.nextInt(50) + 30;
+ 			   path.getElements().add(new LineTo(x, y));
+ 			   PathTransition pathTransition = new PathTransition();  
+ 			   pathTransition.setDuration(Duration.millis(500));  
+ 			   pathTransition.setNode(stone);  
+ 			   pathTransition.setPath(path);  
+ 			   sequentialtransition.getChildren().add(pathTransition);
+ 			   stone.setCenterX(x);
+			   stone.setCenterY(y);
+ 			   player1.num_stone.add(stone);
+    			
     		}
+    		
     	}
     	else {
     		for(Stone stone : cell.num_stone) {
-  			   sequentialTransition.getChildren().add(stoneMove(stone, player2));
+     		   Path path = new Path();
+  			   path.getElements().add(new MoveTo(stone.getCenterX(), stone.getCenterY()));
+  			   Random rand = new Random();
+  			   double x = player2.cellPlace.getX() + rand.nextInt(50) + 30;
+  			   double y = player2.cellPlace.getY() + rand.nextInt(50) + 30;
+  			   path.getElements().add(new LineTo(x, y));
+  			   PathTransition pathTransition = new PathTransition();  
+  			   pathTransition.setDuration(Duration.millis(500));  
+  			   pathTransition.setNode(stone);  
+  			   pathTransition.setPath(path);  
+  			   sequentialtransition.getChildren().add(pathTransition);
+ 			   stone.setCenterX(x);
+			   stone.setCenterY(y);
+  			   player2.num_stone.add(stone);
     		}
     	}
     }
     
-    private boolean checkWinning() {
+    private void checkWinning(SequentialTransition sequentialtransition) {
     	if (c0.num_stone.size() + c6.num_stone.size() == 0) {
-    		return true;
+			for (int i=7;i<=11;i++) {
+				for(Stone stone : board[i].num_stone) {
+					Path path = new Path();
+					path.getElements().add(new MoveTo(stone.getCenterX(), stone.getCenterY()));
+					Random rand = new Random();
+					double x = player1.cellPlace.getX() + rand.nextInt(50) + 30;
+					double y = player1.cellPlace.getY() + rand.nextInt(50) + 30;
+					path.getElements().add(new LineTo(x, y));
+					PathTransition pathTransition = new PathTransition();
+					pathTransition.setDuration(Duration.millis(500));
+					pathTransition.setNode(stone);
+					pathTransition.setPath(path);
+					sequentialtransition.getChildren().add(pathTransition);
+					stone.setCenterX(x);
+					stone.setCenterY(y);
+					player1.num_stone.add(stone);
+					((NormalCell)board[i]).contextMenuListener.setActive(false);
+				}
+			}
+			for (int i=1;i<=5;i++) {
+				for(Stone stone : board[i].num_stone) {
+					Path path = new Path();
+					path.getElements().add(new MoveTo(stone.getCenterX(), stone.getCenterY()));
+					Random rand = new Random();
+					double x = player2.cellPlace.getX() + rand.nextInt(50) + 30;
+					double y = player2.cellPlace.getY() + rand.nextInt(50) + 30;
+					path.getElements().add(new LineTo(x, y));
+					PathTransition pathTransition = new PathTransition();
+					pathTransition.setDuration(Duration.millis(500));
+					pathTransition.setNode(stone);
+					pathTransition.setPath(path);
+					sequentialtransition.getChildren().add(pathTransition);
+					stone.setCenterX(x);
+					stone.setCenterY(y);
+					player2.num_stone.add(stone);
+					((NormalCell)board[i]).contextMenuListener.setActive(false);
+				}
+			}
+
+			if (player1.num_stone.size() < player2.num_stone.size()) {
+				result.setText("Player 2 win !");
+
+			}
+			else if (player1.num_stone.size() > player2.num_stone.size()) {
+				result.setText("Player 1 win !");
+			}
+			else {
+				result.setText("Draw !");
+			}
     	}
-    	return false;
     }
     
      
@@ -288,7 +389,20 @@ public class Board {
 	    			for(int i=7;i<=11;i++) {
 	    				Stone stone = player1.num_stone.get(0);
 	    				player1.num_stone.remove(0);
-	    	  			sequentialtransition.getChildren().add(stoneMove(stone, board[i]));
+	    				Path path = new Path();
+	    	  			path.getElements().add(new MoveTo(stone.getCenterX(), stone.getCenterY()));
+	    	  			Random rand = new Random();
+	    	  			double x = board[i].locationX + rand.nextInt(20) - 10;
+	    	  			double y = board[i].locationY + rand.nextInt(20) - 10;
+	    	  			path.getElements().add(new LineTo(x, y));
+	    	  			PathTransition pathTransition = new PathTransition();  
+	    	  			pathTransition.setDuration(Duration.millis(500));  
+	    	  			pathTransition.setNode(stone);  
+	    	  			pathTransition.setPath(path);  
+	    	  			sequentialtransition.getChildren().add(pathTransition);
+	    	  			stone.setCenterX(x);
+	    	  			stone.setCenterY(y);
+	    	  			board[i].num_stone.add(stone);
 	    			}
 	    		}
     		}
@@ -302,7 +416,21 @@ public class Board {
 	    			for(int i=1;i<=5;i++) {
 	    				Stone stone = player2.num_stone.get(0);
 	    				player2.num_stone.remove(0);
-	    	  			sequentialtransition.getChildren().add(stoneMove(stone, board[i]));
+	    				Path path = new Path();
+	    	  			path.getElements().add(new MoveTo(stone.getCenterX(), stone.getCenterY()));
+	    	  			Random rand = new Random();
+	    	  			double x = board[i].locationX + rand.nextInt(20) - 10;
+	    	  			double y = board[i].locationY + rand.nextInt(20) - 10;
+	    	  			path.getElements().add(new LineTo(x, y));
+	    	  			PathTransition pathTransition = new PathTransition();  
+	    	  			pathTransition.setDuration(Duration.millis(500));  
+	    	  			pathTransition.setNode(stone);  
+	    	  			pathTransition.setPath(path);  
+	    	  			sequentialtransition.getChildren().add(pathTransition);
+	    	  			stone.setCenterX(x);
+	    	  			stone.setCenterY(y);
+	    	  			board[i].num_stone.add(stone);
+	    			
 	    			}
 	    		}  
 	    	}
