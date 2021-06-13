@@ -21,10 +21,6 @@ public class GUI extends Application {
 	Scene ruleScene = new Scene(ruleSceneComponent);
 	
 	
-	
-	
-	
-	
 	@Override
 	public void start(Stage stage) {
 			    

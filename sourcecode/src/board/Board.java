@@ -4,9 +4,9 @@ import board.player.Player;
 import board.stone.Stone;
 import javafx.animation.PathTransition;
 import javafx.animation.SequentialTransition;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
@@ -175,9 +175,13 @@ public class Board {
 	 // setactionlistener function
     private void setActionListener(NormalCell normalcell) {
     	
-    	normalcell.clockwise.setOnAction(new EventHandler<ActionEvent>() {
-    		public void handle(ActionEvent e) {
-    			direction = true;
+    	normalcell.left.setOnMouseClicked(new EventHandler<MouseEvent>() {
+    		public void handle(MouseEvent e) {
+    			if(normalcell.pos < 6) {
+    				direction = false;}
+    			else {
+    				direction = true;
+    			}
     			
     			sequentialTransition = new SequentialTransition();
     			move(normalcell);
@@ -215,9 +219,13 @@ public class Board {
     	});
     	
     	
-    	normalcell.counter_clockwise.setOnAction(new EventHandler<ActionEvent>() {
-    		public void handle(ActionEvent e) {
-    			direction = false;
+    	normalcell.right.setOnMouseClicked(new EventHandler<MouseEvent>() {
+    		public void handle(MouseEvent e) {
+    			if(normalcell.pos < 6) {
+    				direction = true;}
+    			else {
+    				direction = false;
+    			}
     			sequentialTransition = new SequentialTransition();
     			move(normalcell);
     			
