@@ -1,7 +1,7 @@
 package board.cell;
 import java.util.Random;
 
-import board.stone.*;
+import board.stone.Stone;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
@@ -29,6 +29,18 @@ public class KingCell extends Cell {
 		text.setY(y-70);
 		
 	}
+	
+	public KingCell(int pos) {
+		this.pos = pos;
+	}
+	
+	public KingCell(Color color) {
+		circle.setFill(color);
+	}
+	
+	
+	
+	
 	
 	public void setLocation(double x, double y) {
 		int k = (this.pos < 6) ? -50 : 50;
