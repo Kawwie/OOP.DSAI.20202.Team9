@@ -1,6 +1,8 @@
 package board.player;
 
-import board.StoneHolder;
+import java.util.ArrayList;
+
+import board.stone.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -8,13 +10,18 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-public class Player extends StoneHolder {
+public class Player {
+
 	
-	public Text text;
+	
+	public Text text = new Text();
 	public Rectangle cellPlace = new Rectangle(125, 125, Color.BURLYWOOD);
-	public Player(double x, double y, String input) {
-		
-		text = new Text(input);
+	public ArrayList<Stone> num_stone = new ArrayList<Stone>();
+
+	public Player(double x, double y, String input_text) {
+
+		text.setText(input_text);
+
 		text.setFont(Font.font("verdana", FontWeight.SEMI_BOLD, FontPosture.ITALIC, 15));
 		this.cellPlace.setX(x);
 		this.cellPlace.setY(y);
@@ -22,8 +29,8 @@ public class Player extends StoneHolder {
 		cellPlace.setStroke(Color.BLACK);
 		text.setX(x);
 		text.setY(y-20);
-		locationX = x + 50;
-		locationY = y + 50;
 
-	}	
+	}
+
+	
 }
