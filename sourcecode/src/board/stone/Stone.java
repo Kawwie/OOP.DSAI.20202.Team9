@@ -5,24 +5,15 @@ import java.util.Random;
 
 public class Stone extends Circle {
 	
+	public int value;
 	
-	
-	public Stone(double centerX, double centerY) {
-		
+	public Stone(double centerX, double centerY, int value, double radius) {
 		
 		Random rand = new Random();
 		this.setCenterX(centerX);
 		this.setCenterY(centerY);
-		this.setRadius(10);
+		this.setRadius(radius);
 		this.setFill(Color.rgb(rand.nextInt(226), rand.nextInt(226), rand.nextInt(226)));
+		this.value = value;
 	}
-	
-	
-	public Stone(double centerX, double centerY, Color color) {
-		this.setCenterX(centerX);
-		this.setCenterY(centerY);
-		this.setFill(color);
-		
-	}
-	
 }

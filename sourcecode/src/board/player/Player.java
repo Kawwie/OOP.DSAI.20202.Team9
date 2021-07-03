@@ -22,8 +22,9 @@ public class Player extends StoneHolder {
 		cellPlace.setStroke(Color.BLACK);
 		text.setX(x);
 		text.setY(y-20);
-		locationX = x + 50;
-		locationY = y + 50;
+		this.locationX = x + 50;
+		this.locationY = y + 50;
 
-	}	
+	}
+
 }

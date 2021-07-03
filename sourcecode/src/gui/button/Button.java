@@ -1,4 +1,4 @@
-package gui;
+package gui.button;
 
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;

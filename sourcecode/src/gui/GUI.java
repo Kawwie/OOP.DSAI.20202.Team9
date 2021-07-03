@@ -19,12 +19,7 @@ public class GUI extends Application {
 	Scene playScene = new Scene(playSceneComponent);
 	RulSceneComponent ruleSceneComponent = new RulSceneComponent();
 	Scene ruleScene = new Scene(ruleSceneComponent);
-	
-	
-	
-	
-	
-	
+		
 	@Override
 	public void start(Stage stage) {
 			    

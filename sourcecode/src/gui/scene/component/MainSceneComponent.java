@@ -1,7 +1,7 @@
-package gui.scene.component;
+	package gui.scene.component;
 
 
-import gui.Button;
+import gui.button.Button;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;

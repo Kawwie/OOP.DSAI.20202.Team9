@@ -23,22 +23,15 @@ import board.cell.KingCell;
 import board.cell.NormalCell;
 
 public class Board {
+	// for animation
+	private SequentialTransition sequentialTransition;
 	
-	SequentialTransition sequentialTransition;
-	
-	
-	boolean direction;
-	
-
-	
-	
+	private boolean direction;
 	private int turn = 0;
-	
 	private int pointer;
 	
 	//set up turn
 	private Text playerTurn = new Text(100, 100, "PLayer 1 turn");
-	
 	
 	//finish text
 	private Text result = new Text(300, 550, "");
@@ -46,9 +39,7 @@ public class Board {
 	//set up player
 	private Player player2 = new Player(750, 50, "Player 2 score: ");
 	private Player player1 = new Player(50, 450, "Player 1 score: ");
-	
-	
-	
+
 	//setting up the board cell
 	private KingCell c0 = new KingCell(225, 300, 0);
 	private NormalCell c1 = new NormalCell(225, 200, 1);
@@ -67,17 +58,11 @@ public class Board {
     //setting up the board
     private Cell[] board = {c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11};
     
-    private Group root = new Group();
-    
     
     public Group board() {
-    	
-  
+       final Group root = new Group();
        result.setFont(Font.font("verdana", FontWeight.SEMI_BOLD, FontPosture.ITALIC, 80));
        playerTurn.setFont(Font.font("verdana", FontWeight.SEMI_BOLD, FontPosture.ITALIC, 30));
-       
-       
-       
        NormalCell[] normalcell = { c1, c2, c3, c4, c5, c7, c8, c9, c10, c11};
        KingCell[] kingcell = { c0, c6 };
        Player[] player = { player1, player2 };
@@ -96,14 +81,9 @@ public class Board {
        for (Cell i : board) {
     	   root.getChildren().addAll(i.num_stone);
        }
-
-       
        
  	   root.getChildren().addAll(playerTurn, result);
- 	   
- 	   
  	   return root;
- 	   
     }
     
     public PathTransition stoneMove(Stone stone, StoneHolder stoneHolder) {
@@ -122,12 +102,10 @@ public class Board {
 		stoneHolder.num_stone.add(stone);
 		return pathTransition;
     }
-    
+    // for moving the cell
     public void move(NormalCell cell) {
     	
     	int k = (direction) ? 1 : -1;
-    	
-    	
     	pointer = cell.pos%12 + 12;
     	int numberOfStone = cell.num_stone.size();
     	for(int i=0;i<numberOfStone;i++) {
@@ -136,7 +114,6 @@ public class Board {
 			   cell.num_stone.remove(0); 
 			   sequentialTransition.getChildren().add(stoneMove(stone, board[pointer%12]));
 	   }
-    	
     	//check if can pick again
     	
     	if(!((pointer+k)%12 == 0 || (pointer+k)%12 ==6)) {
@@ -144,7 +121,6 @@ public class Board {
     			move(((NormalCell) board[(pointer+k)%12]));
     		}
     	}
-    	
         if(board[(pointer+k)%12].num_stone.size() == 0 && board[(pointer+k*2)%12].num_stone.size() != 0) {
             takeStone(board[(pointer+k*2)%12]);
             board[(pointer+k*2)%12].num_stone.clear();
@@ -213,8 +189,6 @@ public class Board {
     	    	printBoard();
     		}
     	});
-    	
-    	
     	normalcell.counter_clockwise.setOnAction(new EventHandler<ActionEvent>() {
     		public void handle(ActionEvent e) {
     			direction = false;
@@ -313,10 +287,10 @@ public class Board {
     //for printing number of stones
 	private void printBoard() {
 		for (Cell cell : board) {
-			cell.text.setText("" + cell.num_stone.size());
+			cell.text.setText("" + cell.score());
 		}
-		player1.text.setText("player 1 score: " + player1.num_stone.size());
-		player2.text.setText("player 2 score: " + player2.num_stone.size());
+		player1.text.setText("player 1 score: " + player1.score());
+		player2.text.setText("player 2 score: " + player2.score());
 	}
 
 }

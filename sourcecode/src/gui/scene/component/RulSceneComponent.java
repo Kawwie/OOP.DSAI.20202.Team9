@@ -1,10 +1,10 @@
 package gui.scene.component;
-import gui.Button;
+import gui.button.Button;
 import javafx.scene.text.Text;
 
 public class RulSceneComponent extends javafx.scene.Group {
 	public Button returnbtn = new Button("Return");
-	final Text rule = new Text(100, 100, "Mục tiêu cần đạt được để giành chiến thắng: người thắng cuộc trong trò chơi này là người mà khi cuộc chơi kết thúc có tổng số dân quy đổi nhiều hơn."
+	private final Text rule = new Text(100, 100, "Mục tiêu cần đạt được để giành chiến thắng: người thắng cuộc trong trò chơi này là người mà khi cuộc chơi kết thúc có tổng số dân quy đổi nhiều hơn."
 			+ "\n\n"
 			+ "Tùy theo luật chơi từng địa phương hoặc thỏa thuận giữa hai người chơi nhưng phổ biến là 1 quan được quy đổi bằng 10 dân hoặc 5 dân (cờ)."
 			+ "\n\n"
